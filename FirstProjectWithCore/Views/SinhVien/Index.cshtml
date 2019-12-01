@@ -1,0 +1,54 @@
+﻿@model ReflectionIT.Mvc.Paging.PagingList<FirstProjectWithCore.Models.SinhVien>
+@using ReflectionIT.Mvc.Paging
+@addTagHelper *,ReflectionIT.Mvc.Paging
+@{ 
+    ViewData["Title"] = "Index";
+}
+
+<h2>Có @ViewBag.count sinh viên</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary"> <i class="fas fa-plus-square"></i> Create New</a>
+</p>
+<nav aria-label="SinhVien navigation">
+    @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model })
+</nav>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaSV)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenSv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaSV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.MaSV" class="btn btn-success" style="color:white"><i class="fas fa-edit"></i> Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.MaSV" class="btn btn-info" style="color:white"><i class="fas fa-info-circle"></i> Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.MaSV" class="btn btn-danger" style="color:white"><i class="far fa-trash-alt"></i> Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@*<nav aria-label="Suppliers navigation example">
+    <vc:pager paging-list="@Model"></vc:pager>
+</nav>*@
